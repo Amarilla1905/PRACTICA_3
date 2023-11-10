@@ -77,7 +77,7 @@ public class Main {
         
         System.out.println("");
     
-        System.out.println( arbol.find(6));
+        System.out.println(arbol.find(6));
         System.out.println("maximo valor");
         System.out.println(arbol.findMaxValue());
         System.out.println("Minimo valor");

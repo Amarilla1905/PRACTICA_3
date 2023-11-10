@@ -107,20 +107,28 @@ public class binarySearchTree<t> extends BinaryTree {
             }
         }
     }
-
+//----------------------------------------------------------------------------------------------------------------------
     public t removeBST(int k) {
-        NodeBTree v = find(k);
-        t temp = (t) v.getData();
-        if (hasLeft(v) && hasRight(v)) {
-            NodeBTree w = predecessor(v);
-            v.setData(w.getData());
-            super.remove(w);
-
-        } else {
-            super.remove(v);
-        }
-        return temp;
+    NodeBTree<t> v = find(k);
+    if (v == null) {
+        return null; // Si el nodo con la clave k no existe, retornar null o lanzar una excepción según tu lógica       +
     }
+
+    t temp = v.getData(); // Guardar el valor del nodo a eliminar                                                       +
+
+    if (isLeaf(v)) {
+        removeLeafNode(v);
+    } else if (hasLeft(v) && hasRight(v)) {
+        NodeBTree<t> predecessor = predecessor(v); //                                                                   +
+        v.setData(predecessor.getData());
+        remove(predecessor);
+    } else {
+        replaceWithChildNode(v);
+    }
+
+    return temp; // Retornar el valor del nodo eliminado                                                                +
+}
+//----------------------------------------------------------------------------------------------------------------------
     
     public t findMaxValue() {
         NodeBTree<t> maxNode = findMaxNode(root);

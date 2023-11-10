@@ -4,10 +4,13 @@
  */
 package Interfaces;
 
+import ED.NodeBTree;
 import binarySearch.binarySearchTree;
+import binarySearch.bstEntry;
 import javax.swing.JFrame;
 import lienzoarbol.Controlador;
 import lienzoarbol.Lienzo;
+import ordenamientoAB.OrderTree;
 import usuario.Usuario;
 
 /**
@@ -40,14 +43,20 @@ public class PrintABB extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_Clave = new javax.swing.JTextField();
+        B_Buscar = new javax.swing.JButton();
+        B_Eliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         B_Graficar = new javax.swing.JMenu();
         B_Mostrar_Grafica = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        B_Recorridos = new javax.swing.JMenu();
         B_Preorder = new javax.swing.JMenuItem();
         B_Inorder = new javax.swing.JMenuItem();
         B_Postorder = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        B_Valores = new javax.swing.JMenu();
+        B_Valor_Minimo = new javax.swing.JMenuItem();
+        B_Valor_Maximo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -84,31 +93,56 @@ public class PrintABB extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Ingreso de datos para generar el arbol binario de busqueda");
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Clave:");
+
+        txt_Clave.setForeground(new java.awt.Color(0, 0, 0));
+
+        B_Buscar.setText("Buscar");
+        B_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_BuscarActionPerformed(evt);
+            }
+        });
+
+        B_Eliminar.setText("Eliminar");
+        B_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_EliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(B_Buscar)
+                        .addGap(50, 50, 50)
+                        .addComponent(B_Ingresar)
+                        .addGap(50, 50, 50)
+                        .addComponent(B_Eliminar))
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(171, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(94, 94, 94)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                            .addComponent(txt_Clave))))
                 .addGap(162, 162, 162))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(B_Ingresar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,14 +157,21 @@ public class PrintABB extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(B_Ingresar)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_Clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(B_Ingresar)
+                    .addComponent(B_Buscar)
+                    .addComponent(B_Eliminar))
                 .addGap(55, 55, 55))
         );
 
         B_Graficar.setText("Grafica del árbol");
 
-        B_Mostrar_Grafica.setText("B_Mostrar_Grafica");
+        B_Mostrar_Grafica.setText("Mostrar Grafica");
         B_Mostrar_Grafica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 B_Mostrar_GraficaActionPerformed(evt);
@@ -140,7 +181,7 @@ public class PrintABB extends javax.swing.JFrame {
 
         jMenuBar1.add(B_Graficar);
 
-        jMenu2.setText("Recorridos");
+        B_Recorridos.setText("Recorridos");
 
         B_Preorder.setText("Preorder");
         B_Preorder.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +189,7 @@ public class PrintABB extends javax.swing.JFrame {
                 B_PreorderActionPerformed(evt);
             }
         });
-        jMenu2.add(B_Preorder);
+        B_Recorridos.add(B_Preorder);
 
         B_Inorder.setText("Inorder");
         B_Inorder.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +197,7 @@ public class PrintABB extends javax.swing.JFrame {
                 B_InorderActionPerformed(evt);
             }
         });
-        jMenu2.add(B_Inorder);
+        B_Recorridos.add(B_Inorder);
 
         B_Postorder.setText("Postorder");
         B_Postorder.addActionListener(new java.awt.event.ActionListener() {
@@ -164,17 +205,34 @@ public class PrintABB extends javax.swing.JFrame {
                 B_PostorderActionPerformed(evt);
             }
         });
-        jMenu2.add(B_Postorder);
+        B_Recorridos.add(B_Postorder);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(B_Recorridos);
 
-        jMenu7.setText("Salir");
-        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+        B_Valores.setText("Valores");
+        B_Valores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu7MouseClicked(evt);
+                B_ValoresMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu7);
+
+        B_Valor_Minimo.setText("Valor Minimo");
+        B_Valor_Minimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_Valor_MinimoActionPerformed(evt);
+            }
+        });
+        B_Valores.add(B_Valor_Minimo);
+
+        B_Valor_Maximo.setText("Valor Maximo");
+        B_Valor_Maximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B_Valor_MaximoActionPerformed(evt);
+            }
+        });
+        B_Valores.add(B_Valor_Maximo);
+
+        jMenuBar1.add(B_Valores);
 
         setJMenuBar(jMenuBar1);
 
@@ -192,9 +250,9 @@ public class PrintABB extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+    private void B_ValoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B_ValoresMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu7MouseClicked
+    }//GEN-LAST:event_B_ValoresMouseClicked
 
     private void B_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_IngresarActionPerformed
      // Obtener los datos ingresados en la interfaz
@@ -225,15 +283,18 @@ public class PrintABB extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void B_PreorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_PreorderActionPerformed
-        // TODO add your handling code here:
+        OrderTree<Usuario> orderTree = new OrderTree<>();
+        orderTree.preOrder(arbol, arbol.Root(), 0);
     }//GEN-LAST:event_B_PreorderActionPerformed
 
     private void B_InorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_InorderActionPerformed
-        // TODO add your handling code here:
+        OrderTree<Usuario> orderTree = new OrderTree<>();
+        orderTree.inOrder(arbol, arbol.Root(), 0);
     }//GEN-LAST:event_B_InorderActionPerformed
 
     private void B_PostorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_PostorderActionPerformed
-        // TODO add your handling code here:
+        OrderTree<Usuario> orderTree = new OrderTree<>();
+        orderTree.posOrder(arbol, arbol.Root(), 0);
     }//GEN-LAST:event_B_PostorderActionPerformed
 
     private void B_Mostrar_GraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Mostrar_GraficaActionPerformed
@@ -258,6 +319,98 @@ public class PrintABB extends javax.swing.JFrame {
         ventana.setSize(600, 600);
         ventana.setVisible(true);
     }//GEN-LAST:event_B_Mostrar_GraficaActionPerformed
+
+    private void B_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_BuscarActionPerformed
+    // Obtener la clave ingresada en el campo de texto
+    String claveBusqueda = txt_Clave.getText();
+
+    // Verificar si la clave ingresada no está vacía
+    if (!claveBusqueda.isEmpty()) {
+        // Convertir la clave a un tipo adecuado según la implementación de tu árbol
+        int claveEntera = Integer.parseInt(claveBusqueda);
+
+        // Utilizar el método find para buscar el nodo en el árbol
+        NodeBTree<bstEntry> nodoEncontrado = arbol.find(claveEntera);
+
+        // Verificar si se encontró el nodo
+        if (nodoEncontrado != null) {
+            // Obtener el bstEntry del nodo encontrado
+            bstEntry usuarioEncontrado = nodoEncontrado.getData();
+
+            // Imprimir información del usuario encontrado o realizar la acción correspondiente
+            System.out.println("Usuario encontrado: " + usuarioEncontrado.toString());
+        } else {
+            System.out.println("Usuario no encontrado."); // Puedes mostrar un mensaje o realizar la acción correspondiente
+        }
+    } else {
+        System.out.println("Por favor, ingrese una clave válida."); // Puedes mostrar un mensaje o realizar la acción correspondiente
+    }
+    }//GEN-LAST:event_B_BuscarActionPerformed
+
+    private void B_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EliminarActionPerformed
+        // Obtener la clave ingresada en el campo de texto
+    String claveEliminar = txt_Clave.getText();
+
+    // Verificar si la clave ingresada no está vacía
+    if (!claveEliminar.isEmpty()) {
+        // Convertir la clave a un tipo adecuado según la implementación de tu árbol
+        int clave = Integer.parseInt(claveEliminar);
+
+        // Utilizar el método removeBST para eliminar el nodo del árbol
+        bstEntry usuarioEliminado = (bstEntry) arbol.removeBST(clave);
+
+        // Limpiar el campo de texto después de eliminar el nodo
+        txt_Clave.setText("");
+
+        if (usuarioEliminado != null) {
+            System.out.println("Usuario eliminado exitosamente: " + usuarioEliminado.toString());
+        } else {
+            System.out.println("Usuario no encontrado.");
+        }
+    } else {
+        System.out.println("Por favor, ingrese una clave válida.");
+    }
+    }//GEN-LAST:event_B_EliminarActionPerformed
+
+    private void B_Valor_MinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Valor_MinimoActionPerformed
+        // Verificar si el árbol no está vacío antes de intentar encontrar el valor mínimo
+    if (!arbol.isEmpty()) {
+        // Obtener el valor mínimo del árbol
+        Object minValue = arbol.findMinValue();
+        
+        // Verificar si se encontró un valor mínimo
+        if (minValue != null) {
+            // Mostrar el valor mínimo en la consola (puedes cambiar esto según tus necesidades)
+            System.out.println("Minimo valor: " + minValue.toString());
+        } else {
+            // El árbol está vacío, muestra un mensaje o realiza la acción correspondiente
+            System.out.println("El arbol esta vacio.");
+        }
+    } else {
+        // El árbol está vacío, muestra un mensaje o realiza la acción correspondiente
+        System.out.println("El arbol esta vacio.");
+    }
+    }//GEN-LAST:event_B_Valor_MinimoActionPerformed
+
+    private void B_Valor_MaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_Valor_MaximoActionPerformed
+        // Verificar si el árbol no está vacío antes de intentar encontrar el valor máximo
+    if (!arbol.isEmpty()) {
+        // Obtener el valor máximo del árbol
+        Object maxValue = arbol.findMaxValue();
+        
+        // Verificar si se encontró un valor máximo
+        if (maxValue != null) {
+            // Mostrar el valor máximo en la consola (puedes cambiar esto según tus necesidades)
+            System.out.println("Maximo valor: " + maxValue.toString());
+        } else {
+            // El árbol está vacío, muestra un mensaje o realiza la acción correspondiente
+            System.out.println("El arbol esta vacio.");
+        }
+    } else {
+        // El árbol está vacío, muestra un mensaje o realiza la acción correspondiente
+        System.out.println("El arbol esta vacio.");
+    }
+    }//GEN-LAST:event_B_Valor_MaximoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,20 +448,26 @@ public class PrintABB extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton B_Buscar;
+    private javax.swing.JButton B_Eliminar;
     private javax.swing.JMenu B_Graficar;
     private javax.swing.JButton B_Ingresar;
     private javax.swing.JMenuItem B_Inorder;
     private javax.swing.JMenuItem B_Mostrar_Grafica;
     private javax.swing.JMenuItem B_Postorder;
     private javax.swing.JMenuItem B_Preorder;
+    private javax.swing.JMenu B_Recorridos;
+    private javax.swing.JMenuItem B_Valor_Maximo;
+    private javax.swing.JMenuItem B_Valor_Minimo;
+    private javax.swing.JMenu B_Valores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu7;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txt_Clave;
     // End of variables declaration//GEN-END:variables
 }
